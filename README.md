@@ -1,2 +1,2 @@
-# SpringBoot_GamesAPI
+# SpringBoot_GamesAPI (In proccess)
 After having gathered some experience, I am working on making an API from scratch with data insertion in a H2 database.

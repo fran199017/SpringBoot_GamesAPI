@@ -32,6 +32,7 @@ public class GameService {
 
     /*API URLs*/
     private static final String ALLGAMES ="games";
+    private static final int PAGE_SIZE = 40;
 
     private RestTemplate restTemplate;
     private JsonConverterService jsonConverter;
@@ -47,34 +48,36 @@ public class GameService {
     }
 
     public void saveListOfGames() {
-        String url = apiName + ALLGAMES + apiKey;
-        ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(""), String.class);
-        if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null){
-            String jsonString =  response.getBody().toString();
-            JSONObject json = jsonConverter.getJSONObjectForJSONString(jsonString);
+        for(int page = 1; page < 5; page++ ){
+            String url = apiName + ALLGAMES + apiKey + "&page_size="+ PAGE_SIZE + "&page=" + page;
+            ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(""), String.class);
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null){
+                String jsonString =  response.getBody().toString();
+                JSONObject json = jsonConverter.getJSONObjectForJSONString(jsonString);
 
-            try{
-                JSONArray array = json.getJSONArray("results");
-                List<Game> games = new ArrayList<>();
-                for (int i = 0 ; i< array.length();i++){
-                    Game game = new Game();
-                    int id = array.getJSONObject(i).getInt("id");
-                    String name = array.getJSONObject(i).getString("name");
-                    String rating = array.getJSONObject(i).getString("rating");
-                    String image = array.getJSONObject(i).getString("background_image");
-                    String released = array.getJSONObject(i).getString("released");
-                    game.setId(id);
-                    game.setName(name);
-                    game.setRating(rating);
-                    game.setBackGroundImage(image);
-                    game.setReleased(released);
-                    games.add(game);
-                    gameRepository.save(game);
+                try{
+                    JSONArray array = json.getJSONArray("results");
+                    List<Game> games = new ArrayList<>();
+                    for (int i = 0 ; i< array.length();i++){
+                        Game game = new Game();
+                        int id = array.getJSONObject(i).getInt("id");
+                        String name = array.getJSONObject(i).getString("name");
+                        String rating = array.getJSONObject(i).getString("rating");
+                        String image = array.getJSONObject(i).getString("background_image");
+                        String released = array.getJSONObject(i).getString("released");
+                        game.setId(id);
+                        game.setName(name);
+                        game.setRating(rating);
+                        game.setBackGroundImage(image);
+                        game.setReleased(released);
+                        games.add(game);
+                        gameRepository.save(game);
+                    }
+                }catch (Exception e){
+                    log.error("Error: {}", e.getMessage());
                 }
-            }catch (Exception e){
-                log.error("Error: {}", e.getMessage());
-            }
 
+            }
         }
     }
 

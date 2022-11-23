@@ -11,17 +11,21 @@
     border-radius: 4px;
     padding: .5rem;
 }
+.card-img-top{
+    margin-bottom: 5px;
+}
 
 .custom-card {
     border-radius: 20px;
 }
 
 .card-body{
+    padding: 0.5rem !important;
     background-color: white;
 }
 
 body{
     width: 100%;
     heigth: 100%;
-    background-color: #8d95af !important;
+    background-color: black !important;
 }

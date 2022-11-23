@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
@@ -64,9 +65,10 @@ public class GamesController {
             @ApiResponse(code = 400, message = BAD_REQUEST),
             @ApiResponse(code = 401, message = UNAUTHORIZED)
     })
-    public ResponseEntity<Object> getListOfGames() {
+    public ResponseEntity<Object> getListOfGames(int page) {
         try{
-            List<Game> listOfGames = gameService.getListOfGames();
+            Pageable pageable = PageRequest.of(page -1,14);
+            Page<Game> listOfGames = gameService.getListOfGames(pageable);
             if (!listOfGames.isEmpty()){
                 return new ResponseEntity<>(listOfGames,HttpStatus.OK);
             }

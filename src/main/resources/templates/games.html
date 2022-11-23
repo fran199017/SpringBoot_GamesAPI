@@ -16,7 +16,7 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		  <ul class="navbar-nav mr-auto">
 			  <li class="nav-item active">
-				  <a class="nav-link" th:href="@{/public/games}">Games <span class="sr-only">(current)</span></a>
+				  <a class="nav-link" th:href="@{games}">Games <span class="sr-only">(current)</span></a>
 			  </li>
 
 			 <!-- <li class="nav-item dropdown">
@@ -34,7 +34,7 @@
 	  </div>
   </nav>
 	<div class="cards">
-	  <div class="card"  th:each="game : ${games}">
+	  <div class="card"  th:each="game : ${listOfGames.content}">
 		  <div class="card-body">
 			  <img class="card-img-top" th:src="@{${game.backGroundImage}}" alt="Card image cap">
 			  <h5 class="card-title" th:text="${game.name}">Id</h5>
@@ -46,5 +46,14 @@
 		  </div>
 	  </div>
 	</div>
+
+	  <div class="text-xs-center">
+		  <ul class="pagination  justify-content-center">
+			  <li th:each="pageNumber : ${pageNumbers}" class="page-item">
+				  <a th:href="@{'games?page=' + ${pageNumber}}" th:text=${pageNumber} class="page-link" >Previous</a>
+			  </li>
+		  </ul>
+	  </div>
+
   </body>
 </html>

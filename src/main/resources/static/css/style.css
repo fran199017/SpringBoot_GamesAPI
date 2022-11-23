@@ -24,6 +24,11 @@
     background-color: white;
 }
 
+.page-item{
+    min-width: 40px;
+    max-width: 40px;
+}
+
 body{
     width: 100%;
     heigth: 100%;

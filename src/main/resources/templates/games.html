@@ -8,7 +8,7 @@
  </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	  <a class="navbar-brand" href="index">Home</a>
+	  <a class="navbar-brand"  href="index">Home</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -16,23 +16,24 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		  <ul class="navbar-nav mr-auto">
 			  <li class="nav-item active">
-				  <a class="nav-link" th:href="@{games}">Games <span class="sr-only">(current)</span></a>
+				  <a class="nav-link" href="games?page=1">Games <span class="sr-only">(current)</span></a>
 			  </li>
-
-			 <!-- <li class="nav-item dropdown">
-				  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  Dropdown
-				  </a>
-				  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					  <a class="dropdown-item" href="#">Action</a>
-					  <a class="dropdown-item" href="#">Another action</a>
-					  <div class="dropdown-divider"></div>
-					  <a class="dropdown-item" href="#">Something else here</a>
-				  </div>
-			  </li>-->
+			  <li class="nav-item">
+				  <select onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
+					  <option selected disabled>Selecciona un filtro</option>
+					  <option value="name">Name</option>
+					  <option value="rating">Rating</option>
+				  </select>
+			  </li>
 		  </ul>
 	  </div>
   </nav>
+
+  <div style="margin: 15px; width: 15%;" class="input-group pull-right">
+	  <input type="text" id="input_filter" class="form-control" placeholder="Filter value">
+	  <button id="btnfilter" disabled style="margin-left: 5px;"  onclick="filterGames()" class="btn btn-success">Go filter</button>
+  </div>
+
 	<div class="cards">
 	  <div class="card"  th:each="game : ${listOfGames.content}">
 		  <div class="card-body">
@@ -51,9 +52,11 @@
 		  <ul class="pagination  justify-content-center">
 			  <li th:each="pageNumber : ${pageNumbers}" class="page-item">
 				  <a th:href="@{'games?page=' + ${pageNumber}}" th:text=${pageNumber} class="page-link" >Previous</a>
+
 			  </li>
 		  </ul>
 	  </div>
 
   </body>
+  <script type="text/javascript" src="static/js/games.js" th:src="@{/js/games.js}" th:attr="page=${page}"></script>
 </html>

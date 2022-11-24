@@ -2,6 +2,7 @@ package com.example.gamesapi.gamesapi.games.services;
 
 import com.example.gamesapi.gamesapi.games.model.Game;
 
+import com.example.gamesapi.gamesapi.games.model.GameSpecification;
 import com.example.gamesapi.gamesapi.games.repository.GameRepository;
 import com.example.gamesapi.gamesapi.utils.JsonConverterService;
 import com.google.gson.Gson;
@@ -91,6 +92,14 @@ public class GameService {
         return page;
     }
 
+    public List<Game> getListOfGamesWithCriteria(GameSpecification spec) {
+        List<Game> games = gameRepository.findAll(spec);
+        if (games.isEmpty()){
+            return Collections.emptyList();
+        }
+        return games;
+    }
+
     public Game findById(int id){
         Optional<Game> gameOpt = gameRepository.findById(id);
         if (!gameOpt.isPresent()){
@@ -98,4 +107,6 @@ public class GameService {
         }
         return gameOpt.get();
     }
+
+
 }

@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Locale;
 
 public class GameSpecification implements Specification<Game> {
 
@@ -30,7 +31,7 @@ public class GameSpecification implements Specification<Game> {
     public Predicate toPredicate(Root<Game> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder builder) {
 
         if (criteria.getKey().equals(NAME)){
-            return builder.like(root.get(NAME),"%" + criteria.getValue() + "%");
+            return builder.like(builder.upper(root.get(NAME)), "%" + criteria.getValue().toUpperCase(Locale.ROOT) + "%");
         }
         else if (criteria.getKey().equals(RATING)){
             return builder.greaterThanOrEqualTo(root.get(RATING),criteria.getValue());

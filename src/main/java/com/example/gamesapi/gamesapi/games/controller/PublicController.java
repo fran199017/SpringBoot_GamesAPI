@@ -53,6 +53,9 @@ public class PublicController {
     public ModelAndView games(int page, String key, String value ){
         try{
             GamesCriteria gamesCriteria = null;
+            Pageable pageable;
+            Page<Game> listOfGames = null;
+            int totalPages = 0;
 
             if (key!= null && value != null){
                 gamesCriteria = new GamesCriteria();
@@ -60,30 +63,32 @@ public class PublicController {
                 gamesCriteria.setValue(value);
             }
 
-
             ModelAndView model = new ModelAndView();
             model.setViewName("games");
-            Page<Game> listOfGames;
 
             if (gamesCriteria != null){
                 GameSpecification gameSpecification = new GameSpecification(gamesCriteria);
                 List<Game> games = gameService.getListOfGamesWithCriteria(gameSpecification);
-                Pageable pageable = PageRequest.of(0, games.size());
-                listOfGames = new PageImpl<>(games,pageable, games.size());
-                model.addObject("listOfGames", listOfGames);
+                if (!games.isEmpty()){
+                    pageable = PageRequest.of(0, games.size());
+                    listOfGames = new PageImpl<>(games,pageable, games.size());
+                    totalPages = listOfGames.getTotalPages();
+                }
             }else{
-                Pageable pageable = PageRequest.of(page -1,30);
+                pageable = PageRequest.of(page -1,30);
                 listOfGames = gameService.getListOfGames(pageable);
-                model.addObject("listOfGames", listOfGames);
+                totalPages = listOfGames.getTotalPages();
             }
 
-            int totalPages = listOfGames.getTotalPages();
+
             if (totalPages > 0){
                 List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                         .boxed()
                         .collect(Collectors.toList());
                 model.addObject("pageNumbers", pageNumbers);
             }
+
+            model.addObject("listOfGames", listOfGames);
             model.addObject("page", page);
             return model;
         }catch(Exception e){

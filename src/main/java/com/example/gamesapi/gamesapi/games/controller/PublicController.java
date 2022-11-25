@@ -50,7 +50,7 @@ public class PublicController {
     }
 
     @GetMapping(value = "/games")
-    public ModelAndView games(int page, String key, String value ){
+    public ModelAndView games(int page, String key, String value, String operator ){
         try{
             GamesCriteria gamesCriteria = null;
             Pageable pageable;
@@ -61,6 +61,7 @@ public class PublicController {
                 gamesCriteria = new GamesCriteria();
                 gamesCriteria.setKey(key);
                 gamesCriteria.setValue(value);
+                gamesCriteria.setOperator(operator);
             }
 
             ModelAndView model = new ModelAndView();

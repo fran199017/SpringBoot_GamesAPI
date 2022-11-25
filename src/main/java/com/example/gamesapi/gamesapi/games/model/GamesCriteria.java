@@ -4,6 +4,15 @@ public class GamesCriteria {
 
     String key;
     String value;
+    String operator;
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
 
     public String getKey() {
         return key;

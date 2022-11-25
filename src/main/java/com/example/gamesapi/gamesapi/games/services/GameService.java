@@ -51,7 +51,7 @@ public class GameService {
     }
 
     public void saveListOfGames() {
-        for(int page = 1; page < 5; page++ ){
+        for(int page = 1; page < 20; page++ ){
             String url = apiName + ALLGAMES + apiKey + "&page_size="+ PAGE_SIZE + "&page=" + page;
             ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(""), String.class);
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null){

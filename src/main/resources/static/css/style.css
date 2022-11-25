@@ -34,3 +34,30 @@ body{
     heigth: 100%;
     background-color: black !important;
 }
+
+/*.form-check{
+    display: inline-block !important;
+    color: white !important;
+}
+
+.input-group{
+    display: inline-flex !important;
+}
+
+.form-control{
+    width: 15%;
+    margin: 10px;
+}*/
+
+.checklist_grid {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 140px 200px;
+    color: white !important;
+    grid-auto-rows: auto;
+    grid-gap: 0.5rem;
+}
+
+.inputs{
+    display: inline-flex;
+}

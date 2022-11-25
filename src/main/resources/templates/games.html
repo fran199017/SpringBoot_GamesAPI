@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
   <head>
   	<link rel="stylesheet" th:href="@{/css/style.css}">
-	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 	<title>Games</title>
-	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+<!--	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	  -->
+	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
  </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -20,20 +21,65 @@
 				  <a class="nav-link" href="games?page=1">Games <span class="sr-only">(current)</span></a>
 			  </li>
 			  <li class="nav-item">
-				  <select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
-					  <option selected disabled>Selecciona un filtro</option>
+<!--				  <select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
+					  <option selected disabled>Select a filter</option>
 					  <option value="name">Name</option>
 					  <option value="rating">Rating</option>
-				  </select>
+					  <option value="year">Year</option>
+				  </select>-->
+<!--				  <select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="operator_filter" class="form-select" aria-label="Default select example">
+					  <option selected disabled>Select a operator query</option>
+					  <option value="name">GREATHER_THAN </option>
+					  <option value="name">LESS_THAN </option>
+					  <option value="name">LIKE</option>
+					  <option value="name">EQUALS </option>
+					  <option value="name">DIFFERENT </option>
+				  </select>-->
 			  </li>
 		  </ul>
 	  </div>
   </nav>
 
-  <div style="margin: 15px; width: 15%;" class="input-group pull-right">
-	  <input type="text" id="input_filter" class="form-control" placeholder="Filter value">
-	  <button id="btnfilter" disabled style="margin-left: 5px;"  onclick="filterGames()" class="btn btn-success">Go filter</button>
+  <div class="checklist_grid">
+
+	  <div class="form-check" style="margin:5px; font-weight: bold;">
+		  Select a filters:
+	  </div>
+	  <div class="form-check" style="margin: 5px; font-weight: bold;">
+		  Select a values
+	  </div>
+
+	  <div class="form-check">
+		  <input onchange="isCheckedName()" class="form-check-input" type="checkbox" value="name" id="check_name">
+		  <label class="form-check-label" for="check_name">
+			  Name
+		  </label>
+	  </div>
+	  <div>
+		  <input disabled type="text" id="input_name" class="form-control" placeholder="Names value">
+	  </div>
+
+	  <div class="form-check">
+		  <input onchange="isCheckedRating()" class="form-check-input" type="checkbox" value="rating" id="check_rating">
+		  <label class="form-check-label" for="check_rating">
+			  Rating
+		  </label>
+	  </div>
+	  <div>
+		  <input disabled type="text" id="input_rating" class="form-control" placeholder="Rating value">
+	  </div>
+
+	  <div class="form-check">
+		  <input onchange="isCheckedYear()" class="form-check-input" type="checkbox" value="year" id="check_year">
+		  <label class="form-check-label" for="check_year">
+			  Year
+		  </label>
+	  </div>
+	  <div>
+		  <input disabled type="text" id="input_year" class="form-control" placeholder="Year value">
+	  </div>
   </div>
+  <button style="width: 341px; margin: 14px;" id="btnfilter" disabled style="margin-left: 5px;"  onclick="filterGames()" class="btn btn-success">Go filter</button>
 
 	<div th:if="${not #lists.isEmpty(listOfGames)}"  class="cards">
 	  <div class="card"  th:each="game : ${listOfGames.content}">

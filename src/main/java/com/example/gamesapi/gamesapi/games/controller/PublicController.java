@@ -37,7 +37,6 @@ public class PublicController {
     @GetMapping(value = "index")
     public ModelAndView index() {
         try {
-
             ModelAndView model = new ModelAndView();
             model.setViewName("index");
             return model;
@@ -78,20 +77,9 @@ public class PublicController {
         try {
             //TODO: Arreglar porque no pasa por el getFiltered que no saca la URL de filtered.
             log.info("GamesCriteria {}", gamesCriteria);
-            GameSpecification gameSpecification = new GameSpecification(gamesCriteria);
-            List<Game> games = gameService.getListOfGamesWithCriteria(gameSpecification);
 
-            if (!games.isEmpty()) {
-              /*  Pageable pageable = PageRequest.of(0, games.size());
-                Page<Game> listOfGames  = new PageImpl<>(games,pageable, games.size());
-                int totalPages = listOfGames.getTotalPages();
-
-                if (totalPages > 0){
-                    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                            .boxed()
-                            .collect(Collectors.toList());
-                    model.addObject("pageNumbers", pageNumbers);*/
-                getFiltered(games);
+            if (gamesCriteria != null) {
+                return getFiltered(gamesCriteria);
             }
             return null;
         } catch (Exception e) {
@@ -102,11 +90,14 @@ public class PublicController {
 
 
     @GetMapping(value = "filtered")
-    public ModelAndView getFiltered(List<Game> games){
+    public ModelAndView getFiltered(GamesCriteria gamesCriteria){
         try{
             log.info("Llego al get filtered");
             ModelAndView model = new ModelAndView();
             model.setViewName("filtered");
+
+            GameSpecification gameSpecification = new GameSpecification(gamesCriteria);
+            List<Game> games = gameService.getListOfGamesWithCriteria(gameSpecification);
 
             if (!games.isEmpty()){
                 model.addObject("listOfGames", games);

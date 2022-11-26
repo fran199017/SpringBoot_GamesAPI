@@ -16,11 +16,6 @@ function filterGames(){
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.send(JSON.stringify(gamesCriteria));
-
-/*    var selectValue = document.getElementById("select_filter").value;
-    var inputValue = document.getElementById("input_filter").value;
-
-    window.location.href = "games?page=1&key=" + selectValue + "&value=" + inputValue;*/
 }
 
 function isCheckedName(){

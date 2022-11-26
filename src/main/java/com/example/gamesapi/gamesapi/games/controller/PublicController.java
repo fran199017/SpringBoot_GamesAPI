@@ -11,18 +11,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Controller
-@RequestMapping("/public")
+/*@Controller*/
+@RequestMapping("public/")
+@RestController
 public class PublicController {
 
     GameService gameService;
@@ -33,56 +32,32 @@ public class PublicController {
     }
 
 
-
     private static final Logger log = LoggerFactory.getLogger(PublicController.class);
 
-    @GetMapping(value = "/index")
-    public ModelAndView index(){
-        try{
+    @GetMapping(value = "index")
+    public ModelAndView index() {
+        try {
 
             ModelAndView model = new ModelAndView();
             model.setViewName("index");
             return model;
-        }catch(Exception e){
-            log.error(e.getMessage(),e);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
             return null;
         }
     }
 
-    @GetMapping(value = "/games")
-    public ModelAndView games(int page, String key, String value, String operator ){
-        try{
-            GamesCriteria gamesCriteria = null;
-            Pageable pageable;
-            Page<Game> listOfGames = null;
-            int totalPages = 0;
-
-            if (key!= null && value != null){
-                gamesCriteria = new GamesCriteria();
-                gamesCriteria.setKey(key);
-                gamesCriteria.setValue(value);
-                gamesCriteria.setOperator(operator);
-            }
-
+    @GetMapping(value = "games")
+    public ModelAndView games(int page) {
+        try {
+            Pageable pageable = PageRequest.of(page - 1, 30);
             ModelAndView model = new ModelAndView();
             model.setViewName("games");
 
-            if (gamesCriteria != null){
-                GameSpecification gameSpecification = new GameSpecification(gamesCriteria);
-                List<Game> games = gameService.getListOfGamesWithCriteria(gameSpecification);
-                if (!games.isEmpty()){
-                    pageable = PageRequest.of(0, games.size());
-                    listOfGames = new PageImpl<>(games,pageable, games.size());
-                    totalPages = listOfGames.getTotalPages();
-                }
-            }else{
-                pageable = PageRequest.of(page -1,30);
-                listOfGames = gameService.getListOfGames(pageable);
-                totalPages = listOfGames.getTotalPages();
-            }
+            Page<Game> listOfGames = gameService.getListOfGames(pageable);
+            int totalPages = listOfGames.getTotalPages();
 
-
-            if (totalPages > 0){
+            if (totalPages > 0) {
                 List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                         .boxed()
                         .collect(Collectors.toList());
@@ -91,6 +66,52 @@ public class PublicController {
 
             model.addObject("listOfGames", listOfGames);
             model.addObject("page", page);
+            return model;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
+    }
+
+    @PostMapping(value = "filteredpost", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ModelAndView postGames(@RequestBody(required = true) GamesCriteria gamesCriteria) {
+        try {
+            //TODO: Arreglar porque no pasa por el getFiltered que no saca la URL de filtered.
+            log.info("GamesCriteria {}", gamesCriteria);
+            GameSpecification gameSpecification = new GameSpecification(gamesCriteria);
+            List<Game> games = gameService.getListOfGamesWithCriteria(gameSpecification);
+
+            if (!games.isEmpty()) {
+              /*  Pageable pageable = PageRequest.of(0, games.size());
+                Page<Game> listOfGames  = new PageImpl<>(games,pageable, games.size());
+                int totalPages = listOfGames.getTotalPages();
+
+                if (totalPages > 0){
+                    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                            .boxed()
+                            .collect(Collectors.toList());
+                    model.addObject("pageNumbers", pageNumbers);*/
+                getFiltered(games);
+            }
+            return null;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
+    }
+
+
+    @GetMapping(value = "filtered")
+    public ModelAndView getFiltered(List<Game> games){
+        try{
+            log.info("Llego al get filtered");
+            ModelAndView model = new ModelAndView();
+            model.setViewName("filtered");
+
+            if (!games.isEmpty()){
+                model.addObject("listOfGames", games);
+                return model;
+            }
             return model;
         }catch(Exception e){
             log.error(e.getMessage(),e);

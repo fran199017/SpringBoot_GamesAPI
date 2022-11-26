@@ -8,16 +8,25 @@ function showInput(){
 }
 
 function filterGames(){
-    var selectValue = document.getElementById("select_filter").value;
+    console.log("Formulario go")
+    const gamesCriteria = new GamesCriteria("name","Grand", "greather_than")
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "filteredpost");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.send(JSON.stringify(gamesCriteria));
+
+/*    var selectValue = document.getElementById("select_filter").value;
     var inputValue = document.getElementById("input_filter").value;
 
-    window.location.href = "games?page=1&key=" + selectValue + "&value=" + inputValue;
+    window.location.href = "games?page=1&key=" + selectValue + "&value=" + inputValue;*/
 }
 
 function isCheckedName(){
     if (document.getElementById('check_name').checked) {
         var inputName = document.getElementById('input_name').disabled = false;
-        arrayKeys.add("name")
+        arrayKeys.push("name")
     } else {
         document.getElementById('input_name').disabled = true;
         var index = array.indexOf("name");
@@ -30,7 +39,7 @@ function isCheckedName(){
 
 function isCheckedRating(){
     if (document.getElementById('check_rating').checked) {
-        arrayKeys.add("rating")
+        arrayKeys.push("rating")
         document.getElementById('input_rating').disabled = false;
     } else {
         var index = array.indexOf("rating");
@@ -44,7 +53,7 @@ function isCheckedRating(){
 
 function isCheckedYear(){
     if (document.getElementById('check_year').checked) {
-        arrayKeys.add("year")
+        arrayKeys.push("year")
         document.getElementById('input_year').disabled = false;
     } else {
         var index = array.indexOf("rating");
@@ -54,4 +63,12 @@ function isCheckedYear(){
         document.getElementById('input_year').disabled = true;
     }
      console.log(arrayKeys);
+}
+
+class GamesCriteria{
+    constructor(keys,value,operator){
+        this.key= keys;
+        this.value = value;
+        this.operator = operator;
+    }
 }

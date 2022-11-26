@@ -1,5 +1,8 @@
 package com.example.gamesapi.gamesapi.games.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
 public class GamesCriteria {
 
     String key;
@@ -28,5 +31,14 @@ public class GamesCriteria {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "GamesCriteria{" +
+                "key='" + key + '\'' +
+                ", value='" + value + '\'' +
+                ", operator='" + operator + '\'' +
+                '}';
     }
 }

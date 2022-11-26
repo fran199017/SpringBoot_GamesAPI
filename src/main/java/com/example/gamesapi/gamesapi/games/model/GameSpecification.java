@@ -9,7 +9,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Locale;
 
 public class GameSpecification implements Specification<Game> {
 
@@ -40,7 +39,7 @@ public class GameSpecification implements Specification<Game> {
     @Override
     public Predicate toPredicate(Root<Game> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder builder) {
 
-        if (criteria.getKey().equals(NAME)){
+/*        if (criteria.getKey().equals(NAME)){
             return builder.like(builder.upper(root.get(NAME)), "%" + criteria.getValue().toUpperCase(Locale.ROOT) + "%");
         }
         else if (criteria.getKey().equals(RATING)){
@@ -48,7 +47,7 @@ public class GameSpecification implements Specification<Game> {
         }
         else if (criteria.getKey().equals(YEAR)){
             //TODO: Filtrar el año del string y compararlo con el criteriagetValue()
-        }
+        }*/
         return builder.like(root.get(NAME),"%" + criteria.getValue() + "%");
     }
 }

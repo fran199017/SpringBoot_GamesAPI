@@ -41,45 +41,50 @@
   </nav>
 
   <div class="checklist_grid">
+	  <form onsubmit="filterGames()" method="post">
+		  <div class="form-check" style="margin:5px; font-weight: bold;">
+			  Select a filters:
+		  </div>
+		  <div class="form-check" style="margin: 5px; font-weight: bold;">
+			  Select a values
+		  </div>
 
-	  <div class="form-check" style="margin:5px; font-weight: bold;">
-		  Select a filters:
-	  </div>
-	  <div class="form-check" style="margin: 5px; font-weight: bold;">
-		  Select a values
-	  </div>
+		  <div class="form-check">
+			  <input onchange="isCheckedName()" class="form-check-input" type="checkbox" value="name" id="check_name">
+			  <label class="form-check-label" for="check_name">
+				  Name
+			  </label>
+		  </div>
+		  <div>
+			  <input disabled type="text" id="input_name" class="form-control" placeholder="Names value">
+		  </div>
 
-	  <div class="form-check">
-		  <input onchange="isCheckedName()" class="form-check-input" type="checkbox" value="name" id="check_name">
-		  <label class="form-check-label" for="check_name">
-			  Name
-		  </label>
-	  </div>
-	  <div>
-		  <input disabled type="text" id="input_name" class="form-control" placeholder="Names value">
-	  </div>
+		  <div class="form-check">
+			  <input onchange="isCheckedRating()" class="form-check-input" type="checkbox" value="rating" id="check_rating">
+			  <label class="form-check-label" for="check_rating">
+				  Rating
+			  </label>
+		  </div>
+		  <div>
+			  <input disabled type="text" id="input_rating" class="form-control" placeholder="Rating value">
+		  </div>
 
-	  <div class="form-check">
-		  <input onchange="isCheckedRating()" class="form-check-input" type="checkbox" value="rating" id="check_rating">
-		  <label class="form-check-label" for="check_rating">
-			  Rating
-		  </label>
-	  </div>
-	  <div>
-		  <input disabled type="text" id="input_rating" class="form-control" placeholder="Rating value">
-	  </div>
+		  <div class="form-check">
+			  <input onchange="isCheckedYear()" class="form-check-input" type="checkbox" value="year" id="check_year">
+			  <label class="form-check-label" for="check_year">
+				  Year
+			  </label>
+		  </div>
+		  <div>
+			  <input disabled type="text" id="input_year" class="form-control" placeholder="Year value">
+		  </div>
+		  <button type="submit" style="width: 341px; margin: 14px;margin-left: 5px;" id="btnfilter"
+				  class="btn btn-success">Go filter</button>
+	  </form>
 
-	  <div class="form-check">
-		  <input onchange="isCheckedYear()" class="form-check-input" type="checkbox" value="year" id="check_year">
-		  <label class="form-check-label" for="check_year">
-			  Year
-		  </label>
-	  </div>
-	  <div>
-		  <input disabled type="text" id="input_year" class="form-control" placeholder="Year value">
-	  </div>
   </div>
-  <button style="width: 341px; margin: 14px;" id="btnfilter" disabled style="margin-left: 5px;"  onclick="filterGames()" class="btn btn-success">Go filter</button>
+
+
 
 	<div th:if="${not #lists.isEmpty(listOfGames)}"  class="cards">
 	  <div class="card"  th:each="game : ${listOfGames.content}">

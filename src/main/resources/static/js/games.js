@@ -16,3 +16,8 @@ function filterGames(){
 
     window.location.href = "games?page=1&key=" + selectValue + "&value=" + inputValue;
 }
+
+function goGame(id){
+    console.log(id);
+      window.location.href = "game?id=" + id;
+}

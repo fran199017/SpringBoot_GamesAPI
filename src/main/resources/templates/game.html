@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<link rel="stylesheet" th:href="@{/css/style.css}">
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	<title>Games</title>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ </head>
+  <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	  <a class="navbar-brand"  href="index">Home</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  <ul class="navbar-nav mr-auto">
+			  <li class="nav-item active">
+				  <a class="nav-link" href="games?page=1">Games</a>
+			  </li>
+		  </ul>
+	  </div>
+	</nav>
+
+	<div th:if="${game != null}" class="card">
+	  <div class="card-body">
+		  <img class="card-img-top" th:src="@{${game.backGroundImage}}" alt="Card image cap">
+		  <h5 class="card-title" th:text="${game.name}">Id</h5>
+		  <p class="card-text" th:text="${'Rating - ' + game.rating}">Rating</p>
+		  <p class="card-text" th:text="${'Released - ' + game.released}">Rating</p>
+	  </div>
+	</div>
+  </body>
+</html>

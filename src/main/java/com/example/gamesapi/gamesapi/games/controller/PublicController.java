@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -90,6 +91,24 @@ public class PublicController {
 
             model.addObject("listOfGames", listOfGames);
             model.addObject("page", page);
+            return model;
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+            return null;
+        }
+    }
+
+    @GetMapping(value = "/game")
+    public ModelAndView game(int id){
+        try{
+            log.info("id {}", id);
+            Game game = gameService.findById(id);
+            ModelAndView model = new ModelAndView();
+            model.setViewName("game");
+            if (game != null){
+                model.addObject("game", game);
+                return model;
+            }
             return model;
         }catch(Exception e){
             log.error(e.getMessage(),e);

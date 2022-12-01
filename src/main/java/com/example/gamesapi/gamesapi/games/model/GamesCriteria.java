@@ -5,17 +5,17 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize
 public class GamesCriteria {
 
+    public GamesCriteria() {
+    }
+
+    public GamesCriteria(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
     String key;
     String value;
-    String operator;
 
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
 
     public String getKey() {
         return key;
@@ -38,7 +38,6 @@ public class GamesCriteria {
         return "GamesCriteria{" +
                 "key='" + key + '\'' +
                 ", value='" + value + '\'' +
-                ", operator='" + operator + '\'' +
                 '}';
     }
 }

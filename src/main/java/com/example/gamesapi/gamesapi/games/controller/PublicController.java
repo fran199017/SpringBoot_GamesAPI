@@ -4,6 +4,7 @@ import com.example.gamesapi.gamesapi.games.model.Game;
 import com.example.gamesapi.gamesapi.games.model.GameSpecification;
 import com.example.gamesapi.gamesapi.games.model.GamesCriteria;
 import com.example.gamesapi.gamesapi.games.services.GameService;
+import io.swagger.models.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /*@Controller*/
-@RequestMapping("public/")
+@RequestMapping("/public")
 @RestController
 public class PublicController {
 
@@ -34,7 +37,7 @@ public class PublicController {
 
     private static final Logger log = LoggerFactory.getLogger(PublicController.class);
 
-    @GetMapping(value = "index")
+    @GetMapping(value = "/index")
     public ModelAndView index() {
         try {
             ModelAndView model = new ModelAndView();
@@ -46,7 +49,7 @@ public class PublicController {
         }
     }
 
-    @GetMapping(value = "games")
+    @GetMapping(value = "/games")
     public ModelAndView games(int page) {
         try {
             Pageable pageable = PageRequest.of(page - 1, 30);
@@ -65,6 +68,7 @@ public class PublicController {
 
             model.addObject("listOfGames", listOfGames);
             model.addObject("page", page);
+            model.addObject("gamescriteria", new GamesCriteria());
             return model;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -72,14 +76,24 @@ public class PublicController {
         }
     }
 
-    @PostMapping(value = "filteredpost", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView postGames(@RequestBody(required = true) GamesCriteria gamesCriteria) {
+    @PostMapping(value = "/games")
+    public ModelAndView postGames(@ModelAttribute GamesCriteria gamesCriteria) {
         try {
-            //TODO: Arreglar porque no pasa por el getFiltered que no saca la URL de filtered.
             log.info("GamesCriteria {}", gamesCriteria);
-
             if (gamesCriteria != null) {
-                return getFiltered(gamesCriteria);
+                GamesCriteria gamesCriteria1 = new GamesCriteria();
+                GameSpecification gameSpecification = new GameSpecification(gamesCriteria1);
+                List<Game> games = gameService.getListOfGamesWithCriteria(gameSpecification);
+
+
+                if (!games.isEmpty()){
+                    ModelAndView model = new ModelAndView();
+                    model.setViewName("redirect:filtered");
+                    model.addObject("games", games);
+                    return model;
+/*                    attributes.addFlashAttribute("games", games);
+                    return new RedirectView("filtered");*/
+                }
             }
             return null;
         } catch (Exception e) {
@@ -89,20 +103,13 @@ public class PublicController {
     }
 
 
-    @GetMapping(value = "filtered")
-    public ModelAndView getFiltered(GamesCriteria gamesCriteria){
+    @GetMapping(value = "/filtered")
+    public ModelAndView getFiltered(){
         try{
+            //TODO: Arreglar
             log.info("Llego al get filtered");
             ModelAndView model = new ModelAndView();
             model.setViewName("filtered");
-
-            GameSpecification gameSpecification = new GameSpecification(gamesCriteria);
-            List<Game> games = gameService.getListOfGamesWithCriteria(gameSpecification);
-
-            if (!games.isEmpty()){
-                model.addObject("listOfGames", games);
-                return model;
-            }
             return model;
         }catch(Exception e){
             log.error(e.getMessage(),e);

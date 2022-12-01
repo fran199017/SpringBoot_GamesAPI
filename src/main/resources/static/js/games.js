@@ -1,4 +1,7 @@
 var page = document.currentScript.getAttribute('page');
+var gamescriteria = document.currentScript.getAttribute('gamescriteria');
+console.log("gamesCriteria");
+console.log(gamescriteria);
 let arrayKeys = [];
 
 console.log(page);
@@ -9,13 +12,10 @@ function showInput(){
 
 function filterGames(){
     console.log("Formulario go")
-    const gamesCriteria = new GamesCriteria("name","Grand", "greather_than")
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "filteredpost");
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");
 
-    xhr.send(JSON.stringify(gamesCriteria));
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "games");
+    xhr.send(gamesCriteria);
 }
 
 function isCheckedName(){
@@ -64,6 +64,5 @@ class GamesCriteria{
     constructor(keys,value,operator){
         this.key= keys;
         this.value = value;
-        this.operator = operator;
     }
 }

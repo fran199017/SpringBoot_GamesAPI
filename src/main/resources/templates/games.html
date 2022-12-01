@@ -41,7 +41,9 @@
   </nav>
 
   <div class="checklist_grid">
-	  <form onsubmit="filterGames()" method="post">
+	  <form th:action="@{/public/games}" method="post" th:object="${gamescriteria}">
+	  <p th:text="${gamescriteria}"></p>
+
 		  <div class="form-check" style="margin:5px; font-weight: bold;">
 			  Select a filters:
 		  </div>
@@ -50,7 +52,7 @@
 		  </div>
 
 		  <div class="form-check">
-			  <input onchange="isCheckedName()" class="form-check-input" type="checkbox" value="name" id="check_name">
+			  <input onchange="isCheckedName()" class="form-check-input" type="checkbox" th:value="${gamescriteria.value}" th:field="${gamescriteria.value}" id="check_name">
 			  <label class="form-check-label" for="check_name">
 				  Name
 			  </label>
@@ -60,7 +62,7 @@
 		  </div>
 
 		  <div class="form-check">
-			  <input onchange="isCheckedRating()" class="form-check-input" type="checkbox" value="rating" id="check_rating">
+			  <input onchange="isCheckedRating()" class="form-check-input" type="checkbox" th:value="${gamescriteria.key}" th:field="*{gamescriteria.key}" id="check_rating">
 			  <label class="form-check-label" for="check_rating">
 				  Rating
 			  </label>
@@ -78,6 +80,7 @@
 		  <div>
 			  <input disabled type="text" id="input_year" class="form-control" placeholder="Year value">
 		  </div>
+
 		  <button type="submit" style="width: 341px; margin: 14px;margin-left: 5px;" id="btnfilter"
 				  class="btn btn-success">Go filter</button>
 	  </form>
@@ -112,5 +115,5 @@
 	  </div>
 
   </body>
-  <script type="text/javascript" src="static/js/games.js" th:src="@{/js/games.js}" th:attr="page=${page}"></script>
+  <script type="text/javascript" src="static/js/games.js" th:src="@{/js/games.js}" th:attr="page=${page},gamescriteria=${gamescriteria}"></script>
 </html>

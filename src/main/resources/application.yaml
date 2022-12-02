@@ -15,10 +15,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
-    url: mysql://l3fyul31x6p8cu8e:hczqbtxdkjlcxs2c@ilzyz0heng1bygi8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/u3tzursgcazc5ak0
-    username: l3fyul31x6p8cu8e
-    password: hczqbtxdkjlcxs2c
-    port: 3306
+    url: mysql://ayzjgb3p5t7gw6eh:rwy993agkkgo9dvk@ilzyz0heng1bygi8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/n34lcenpm8uavs0y
+    username: ayzjgb3p5t7gw6eh
+    password: rwy993agkkgo9dvk
 
 api:
   name: https://rawg.io/api/

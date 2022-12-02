@@ -1,7 +1,7 @@
 # SpringBoot_GamesAPI (In process)
 After having gathered some experience,I am working on a new API Rest. This API downloads
 from a public API a games. Enjoy!
-##Technologies
+## Technologies
 - Spring Boot
 - Thymeleaf
 - Spring Security

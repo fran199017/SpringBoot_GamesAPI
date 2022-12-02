@@ -23,7 +23,7 @@
 					<a class="nav-link" th:href="@{/users}">List of users</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
+					<a class="nav-link" th:href="@{games?page=1}">List of games</a>
 				</li>
 
 				<li class="nav-item">
@@ -50,7 +50,7 @@
 	<div th:if="${not #lists.isEmpty(listOfGames)}"  class="cards">
 	  <div style="cursor:pointer;"   class="card"  th:each="game : ${listOfGames.content}">
 
-		  <div th:if="${user.role == 'admin'}" class="card-header">
+		  <div th:if="${user.role == 'ROLE_ADMIN'}" class="card-header">
 			  <button class="btn" style="background-color:white !important;float: right; padding: 0rem; width:30px; ">
 				  <img th:attr="onclick=|deleteGame('${game.id}')|" class="card-img-top" th:src="@{../images/delete.png}" alt="Card image cap">
 			  </button>

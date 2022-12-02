@@ -11,12 +11,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -64,12 +66,30 @@ public class UsersController {
 
     @GetMapping("/users")
     public String listUsers(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        Users user = userRepository.findByEmail(email);
-        List<Users> listUsers = userRepository.findAll();
-        model.addAttribute("listUsers", listUsers);
-        model.addAttribute("user", user);
-        return "users";
+        try{
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String email = authentication.getName();
+            Users user = userRepository.findByEmail(email);
+            List<Users> listUsers = userRepository.findAll();
+            model.addAttribute("listUsers", listUsers);
+            model.addAttribute("user", user);
+            return "users";
+        }catch (Exception e){
+            log.error("Error {}", e.getMessage());
+            return "index";
+        }
+    }
+
+    @DeleteMapping("/users")
+    public ModelAndView deleteUser(String id) {
+        int intId = Integer.parseInt(id);
+        Optional<Users> userOpt = userRepository.findById(intId);
+        if (userOpt.isPresent()){
+            Users user = userOpt.get();
+            userRepository.delete(user);
+        }
+        ModelAndView model = new ModelAndView();
+        model.setViewName("users");
+        return model;
     }
 }

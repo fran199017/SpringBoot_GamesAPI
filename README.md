@@ -15,10 +15,11 @@ http://localhost:8080/h2-console
 ##Steps
 1. You need register or nav button (you can invent credentials)
 2. Login with email and password.
-3. Select role (in process).
-4. You can try too see users, videogames or only a game pressing on card.
+3. Select role (ROLE_ADMIN, ROLE_USER).
 
-##Role admin(in process)
+#Roles
+###Role admin(in process)
 - You can delete games.
-##Role user
-- Only can view elements.
+- You can access to users and delete users ( not your user).
+###Role user
+- Only can view elements (no user list), throw 403 ERROR.

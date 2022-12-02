@@ -31,6 +31,10 @@ public class Game {
     @Column(name = "RATING", nullable = false)
     String rating;
 
+    @ApiModelProperty(value = "BACKGROUND_IMAGE", required = true)
+    @Column(name = "BACKGROUND_IMAGE", nullable = false)
+    String backGroundImage;
+
     public String getReleased() {
         return released;
     }
@@ -55,7 +59,7 @@ public class Game {
         this.backGroundImage = backGroundImage;
     }
 
-    String backGroundImage;
+
 
     public int getId() {
         return id;

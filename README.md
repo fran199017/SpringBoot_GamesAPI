@@ -22,9 +22,8 @@ http://localhost:8080/h2-console
 - password:
 
 ## Steps
-1. You need register or nav button (you can invent credentials)
+1. You need register or nav button (you can invent credentials) and select role
 2. Login with email and password.
-3. Select role (ROLE_ADMIN, ROLE_USER).
 
 ## Roles
 ### Role admin(in process)

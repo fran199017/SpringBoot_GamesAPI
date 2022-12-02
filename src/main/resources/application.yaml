@@ -12,10 +12,8 @@ spring:
   thymeleaf:
     mode: HTML5
     encoding: UTF-8
-  h2:
-    console.enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
     url: mysql://l3fyul31x6p8cu8e:hczqbtxdkjlcxs2c@ilzyz0heng1bygi8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/u3tzursgcazc5ak0
     username: l3fyul31x6p8cu8e

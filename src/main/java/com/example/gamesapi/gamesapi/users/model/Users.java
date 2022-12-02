@@ -17,6 +17,17 @@ public class Users {
     @Column(nullable = false, length = 64)
     private String password;
 
+    @Column(nullable = false)
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }
@@ -47,6 +58,7 @@ public class Users {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

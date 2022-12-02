@@ -15,4 +15,5 @@ http://localhost:8080/h2-console
 ##Steps
 1. You need register or nav button (you can invent credentials)
 2. Login with email and password.
-3. You can try too see users, videogames or only a game pressing on card.
+3. Select role (in process).
+4. You can try too see users, videogames or only a game pressing on card.

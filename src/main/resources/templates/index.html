@@ -9,40 +9,37 @@
 </head>
 <body style="background-color:white;">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/register}">Register</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/login}">Login</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/users}">List of users</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/users}">List of users</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
+                </li>
 
-        </ul>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid text-center" style="margin-top:5%;">
+        <h5 class="card-title">Welcome to my videogames API in process</h5>
+        <p class="card-text">You can test here some functions of Spring Boot.</p>
+        <b class="card-text">Important! You need register first to check games or users ( you can invent user and password)</b>
     </div>
-</nav>
 
-<div class="container-fluid text-center" style="margin-top:5%;">
-    <h5 class="card-title">Welcome to my videogames API in process</h5>
-    <p class="card-text">You can test here some functions of Spring Boot.</p>
-    <b class="card-text">Important! You need register first to check games or users ( you can invent user and password)</b>
-</div>
-
-<div class="container-fluid text-center" style="margin-top:2%;">
-    <p>Created by Francisco Nicolau Ausejo</p>
-    <a href="https://github.com/fran199017">Look my repositories</a>
-    <br>
-    <a href="mailto:fran199017@gmail.com">Contact to developer</a>
-</div>
-
-
+    <div class="container-fluid text-center" style="margin-top:2%;">
+        <p>Created by Francisco Nicolau Ausejo</p>
+        <a href="https://github.com/fran199017">Look my repositories</a>
+        <br>
+    </div>
 </body>
 </html>

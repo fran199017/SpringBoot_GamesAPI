@@ -22,3 +22,6 @@ spring:
 api:
   name: https://rawg.io/api/
   key: ?key=1a3d6ff0c7c14bfaa121817b5a8476ca
+
+flyway:
+  baseline-on-migrate: true

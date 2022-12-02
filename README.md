@@ -33,16 +33,16 @@ http://localhost:8080/h2-console
 ### Role user
 - Only can view elements (no user list).
 
-### Some images
-List of games
+## Some images
+### List of games
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img.png)
-Filter
+### Filter
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_1.png)
-Result filter
+### Result filter
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_2.png)
-List of users if ROLE_ADMIN result
+### List of users if ROLE_ADMIN result
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_3.png)
-List of users if ROLE_USER result
+### List of users if ROLE_USER result
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_4.png)
 
 

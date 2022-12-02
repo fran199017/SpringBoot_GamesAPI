@@ -80,6 +80,11 @@ public class UsersController {
         }
     }
 
+    @GetMapping("/forbidden")
+    public String forbidden() {
+        return "forbidden";
+    }
+
     @DeleteMapping("/users")
     public ModelAndView deleteUser(String id) {
         int intId = Integer.parseInt(id);

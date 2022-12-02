@@ -24,14 +24,12 @@
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
             </li>
-
-            <li class="nav-item active">
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Sign Out" />
-                </form>
-            </li>
-
         </ul>
+    </div>
+    <div class="float-right">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" />
+        </form>
     </div>
 </nav>
 

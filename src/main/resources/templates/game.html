@@ -8,47 +8,31 @@
 			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
  </head>
   <body>
-<!--	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	  <a class="navbar-brand"  href="index">Home</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-	  </button>
 
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		  <ul class="navbar-nav mr-auto">
-			  <li class="nav-item active">
-				  <a class="nav-link" href="games?page=1">List of games</a>
-			  </li>
-		  </ul>
-	  </div>
-	</nav>-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{/register}">Register</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{/login}">Login</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{/users}">List of users</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
-			</li>
-
-			<li class="nav-item active">
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out" />
-				</form>
-			</li>
-
-		</ul>
-	</div>
-</nav>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/register}">Register</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/login}">Login</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/users}">List of users</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
+				</li>
+			</ul>
+		</div>
+		<div class="float-right">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" />
+			</form>
+		</div>
+	</nav>
 
 	<div th:if="${game != null}" class="card">
 	  <div class="card-body">

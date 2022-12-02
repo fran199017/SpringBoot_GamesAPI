@@ -8,67 +8,44 @@
 			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
  </head>
   <body style="background-color:#efefef !important;">
-<!--  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	  <a class="navbar-brand"  href="index">Home</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-	  </button>
 
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		  <ul class="navbar-nav mr-auto">
-			  <li class="nav-item active">
-				  <a class="nav-link" href="games?page=1">List of games <span class="sr-only">(current)</span></a>
-			  </li>
-			  <li class="nav-item">
-				  <select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
-					  <option selected disabled>Selecciona un filtro</option>
-					  <option value="name">Name</option>
-					  <option value="rating">Rating</option>
-				  </select>
-			  </li>
-		  </ul>
-	  </div>
-  </nav>-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/register}">Register</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/login}">Login</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/users}">List of users</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
+				</li>
 
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{/register}">Register</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{/login}">Login</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{/users}">List of users</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
-			</li>
+				<li class="nav-item">
+					<select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
+						<option selected disabled>Selecciona un filtro</option>
+						<option value="name">Name</option>
+						<option value="rating">Rating</option>
+					</select>
+				</li>
+			</ul>
+		</div>
+		<div class="float-right">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" />
+			</form>
+		</div>
+	</nav>
 
-			<li class="nav-item">
-				<select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
-					<option selected disabled>Selecciona un filtro</option>
-					<option value="name">Name</option>
-					<option value="rating">Rating</option>
-				</select>
-			</li>
-
-			<li class="nav-item active">
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out" />
-				</form>
-			</li>
-
-		</ul>
-	</div>
-</nav>
-
-  <div style="margin: 15px; width: 15%;" class="input-group pull-right">
+	<div style="margin: 15px; width: 15%;" class="input-group pull-right">
 	  <input type="text" id="input_filter" class="form-control" placeholder="Filter value">
 	  <button id="btnfilter" disabled style="margin-left: 5px;"  onclick="filterGames()" class="btn btn-success">Go filter</button>
-  </div>
+	</div>
 
 	<div th:if="${not #lists.isEmpty(listOfGames)}"  class="cards">
 	  <div style="cursor:pointer;" th:attr="onclick=|goGame('${game.id}')|"  class="card"  th:each="game : ${listOfGames.content}">
@@ -77,9 +54,6 @@
 			  <h5 class="card-title" th:text="${game.name}">Id</h5>
 			  <p class="card-text" th:text="${'Rating - ' + game.rating}">Rating</p>
 			  <p class="card-text" th:text="${'Released - ' + game.released}">Rating</p>
-<!--					  <a th:href="@{'/createforItemId/' + ${item.id}}" TODO:GO TO GAME FOR ID FUNCTION.
-				 class="stretched-link btn btn-sm btn-primary mr-2"><i
-					  class="fas fa-rocket mr-2"></i> Start New Discussion</a>-->
 		  </div>
 	  </div>
 	</div>

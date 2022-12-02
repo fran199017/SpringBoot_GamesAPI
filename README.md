@@ -9,32 +9,32 @@ from a public API a games. Enjoy!
 - MVC
 - Swagger2
 
-##Index
+## Index
 http://localhost:8080/index
 or
 http://localhost:8080/register
 
-##H2 Database
+## H2 Database
 http://localhost:8080/h2-console
-###Credentials database
+### Credentials database
 - url: jdbc:h2:mem:mydb
 - user: sa
 - password:
 
-##Steps
+## Steps
 1. You need register or nav button (you can invent credentials)
 2. Login with email and password.
 3. Select role (ROLE_ADMIN, ROLE_USER).
 
-##Roles
-###Role admin(in process)
+## Roles
+### Role admin(in process)
 - You can filter games by rating or like query name.
 - You can delete games.
 - You can access to users and delete users ( not your user).
-###Role user
+### Role user
 - Only can view elements (no user list).
 
-###Some images
+### Some images
 List of games.
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img.png)
 Filter.

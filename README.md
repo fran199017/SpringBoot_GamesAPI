@@ -27,7 +27,7 @@ http://localhost:8080/h2-console
 
 ## Roles
 ### Role admin
-- You can filter games by rating or like query name.
+- You can filter games by name with LIKE QUERY or by rating GREATHER THAN OR EQUAL QUERY
 - You can delete games.
 - You can access to users and delete users ( not your user).
 ### Role user

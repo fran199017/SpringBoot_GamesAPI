@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -123,7 +124,7 @@ public class PublicController {
             String email = authentication.getName();
             Users user = userRepository.findByEmail(email);
 
-            if (user.getRole().equals("admin")){
+            if (user.getRole().equals("ROLE_ADMIN")){
                 int idInt = Integer.parseInt(id);
                 gameService.deleteGame(idInt);
             }

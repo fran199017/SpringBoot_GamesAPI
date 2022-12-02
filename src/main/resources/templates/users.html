@@ -44,16 +44,22 @@
             <tr>
                 <th>User ID</th>
                 <th>E-mail</th>
+                <th>Role</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user: ${listUsers}">
-                <td th:text="${user.id}">User ID</td>
-                <td th:text="${user.email}">E-mail</td>
+            <tr th:each="userOfList: ${listUsers}">
+                <td th:text="${userOfList.id}">User ID</td>
+                <td th:text="${userOfList.email}">E-mail</td>
+                <td th:text="${userOfList.role}">E-mail</td>
+                <td th:if="${user.id != userOfList.id}" style="width: 6%;"><img style="width: 48%;" th:attr="onclick=|deleteUser('${userOfList.id}')|" th:src="@{../images/delete.png}" alt="Card image cap"></td>
+
             </tr>
             </tbody>
         </table>
     </div>
 </div>
 </body>
+<script type="text/javascript" src="static/js/users.js" th:src="@{/js/users.js}"></script>
 </html>

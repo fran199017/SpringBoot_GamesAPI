@@ -50,11 +50,11 @@
 	<div th:if="${not #lists.isEmpty(listOfGames)}"  class="cards">
 	  <div style="cursor:pointer;"   class="card"  th:each="game : ${listOfGames.content}">
 
-<!--		  <div class="card-header">
-			  <button th:if="${user}" class="btn">
-				  <img th:attr="onclick=|deleteGame('${game.id}')|" class="card-img-top" th:src="@{${game.backGroundImage}}" alt="Card image cap">
+		  <div th:if="${user.role == 'admin'}" class="card-header">
+			  <button class="btn" style="background-color:white !important;float: right; padding: 0rem; width:30px; ">
+				  <img th:attr="onclick=|deleteGame('${game.id}')|" class="card-img-top" th:src="@{../images/delete.png}" alt="Card image cap">
 			  </button>
-		  </div>-->
+		  </div>
 
 		  <img th:attr="onclick=|goGame('${game.id}')|" class="card-img-top" th:src="@{${game.backGroundImage}}" alt="Card image cap">
 		  <div th:attr="onclick=|goGame('${game.id}')|" class="card-body">

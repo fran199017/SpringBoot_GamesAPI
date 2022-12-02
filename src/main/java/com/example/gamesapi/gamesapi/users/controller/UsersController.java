@@ -6,6 +6,8 @@ import com.example.gamesapi.gamesapi.users.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,8 +64,12 @@ public class UsersController {
 
     @GetMapping("/users")
     public String listUsers(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Users user = userRepository.findByEmail(email);
         List<Users> listUsers = userRepository.findAll();
         model.addAttribute("listUsers", listUsers);
+        model.addAttribute("user", user);
         return "users";
     }
 }

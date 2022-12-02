@@ -13,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,22 +43,13 @@ public class PublicController {
 
     private static final Logger log = LoggerFactory.getLogger(PublicController.class);
 
-    @GetMapping(value = "/index")
-    public ModelAndView index(){
-        try{
-
-            ModelAndView model = new ModelAndView();
-            model.setViewName("index");
-            return model;
-        }catch(Exception e){
-            log.error(e.getMessage(),e);
-            return null;
-        }
-    }
-
     @GetMapping(value = "/games")
     public ModelAndView games(int page, String key, String value ){
         try{
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String email = authentication.getName();
+            Users user = userRepository.findByEmail(email);
+
             GamesCriteria gamesCriteria = null;
             Pageable pageable;
             Page<Game> listOfGames = null;
@@ -94,6 +88,7 @@ public class PublicController {
 
             model.addObject("listOfGames", listOfGames);
             model.addObject("page", page);
+            model.addObject("user", user);
             return model;
         }catch(Exception e){
             log.error(e.getMessage(),e);
@@ -112,6 +107,29 @@ public class PublicController {
                 model.addObject("game", game);
                 return model;
             }
+            return model;
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+            return null;
+        }
+    }
+
+    //TODO: Sacar rol admin en list users, borrar user como admin, controlar error de registro con mismo email.
+
+    @DeleteMapping(value = "/game")
+    public ModelAndView deleteGame(String id){
+        try{
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String email = authentication.getName();
+            Users user = userRepository.findByEmail(email);
+
+            if (user.getRole().equals("admin")){
+                int idInt = Integer.parseInt(id);
+                gameService.deleteGame(idInt);
+            }
+
+            ModelAndView model = new ModelAndView();
+            model.setViewName("game");
             return model;
         }catch(Exception e){
             log.error(e.getMessage(),e);

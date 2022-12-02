@@ -26,7 +26,7 @@ http://localhost:8080/h2-console
 2. Login with email and password.
 
 ## Roles
-### Role admin(in process)
+### Role admin
 - You can filter games by rating or like query name.
 - You can delete games.
 - You can access to users and delete users ( not your user).
@@ -34,15 +34,15 @@ http://localhost:8080/h2-console
 - Only can view elements (no user list).
 
 ### Some images
-List of games.
+List of games
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img.png)
-Filter.
+Filter
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_1.png)
-Result filter.
+Result filter
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_2.png)
 List of users if ROLE_ADMIN result
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_3.png)
-*List of users if ROLE_USER result
+List of users if ROLE_USER result
 ![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_4.png)
 
 

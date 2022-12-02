@@ -7,8 +7,8 @@
 	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
  </head>
-  <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <body style="background-color:#efefef !important;">
+<!--  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	  <a class="navbar-brand"  href="index">Home</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		  <ul class="navbar-nav mr-auto">
 			  <li class="nav-item active">
-				  <a class="nav-link" href="games?page=1">Games <span class="sr-only">(current)</span></a>
+				  <a class="nav-link" href="games?page=1">List of games <span class="sr-only">(current)</span></a>
 			  </li>
 			  <li class="nav-item">
 				  <select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
@@ -28,7 +28,42 @@
 			  </li>
 		  </ul>
 	  </div>
-  </nav>
+  </nav>-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" th:href="@{/register}">Register</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" th:href="@{/login}">Login</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" th:href="@{/users}">List of users</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
+			</li>
+
+			<li class="nav-item">
+				<select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
+					<option selected disabled>Selecciona un filtro</option>
+					<option value="name">Name</option>
+					<option value="rating">Rating</option>
+				</select>
+			</li>
+
+			<li class="nav-item active">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" />
+				</form>
+			</li>
+
+		</ul>
+	</div>
+</nav>
 
   <div style="margin: 15px; width: 15%;" class="input-group pull-right">
 	  <input type="text" id="input_filter" class="form-control" placeholder="Filter value">

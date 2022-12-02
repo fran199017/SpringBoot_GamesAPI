@@ -4,6 +4,8 @@ import com.example.gamesapi.gamesapi.games.model.Game;
 import com.example.gamesapi.gamesapi.games.model.GameSpecification;
 import com.example.gamesapi.gamesapi.games.model.GamesCriteria;
 import com.example.gamesapi.gamesapi.games.services.GameService;
+import com.example.gamesapi.gamesapi.users.model.Users;
+import com.example.gamesapi.gamesapi.users.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -27,10 +28,12 @@ import java.util.stream.IntStream;
 public class PublicController {
 
     GameService gameService;
+    UserRepository userRepository;
 
     @Autowired
-    public PublicController(GameService gameService) {
+    public PublicController(GameService gameService, UserRepository userRepository) {
         this.gameService = gameService;
+        this.userRepository = userRepository;
     }
 
 

@@ -14,10 +14,10 @@ public class Users {
     @Column(name = "EMAIL", nullable = false,  unique = true, length = 45)
     private String email;
 
-    @Column(nullable = false, length = 64)
+    @Column(name = "PASSWORD",nullable = false, length = 64)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "ROLE", nullable = false)
     private String role;
 
     public String getRole() {

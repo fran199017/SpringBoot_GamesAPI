@@ -24,6 +24,12 @@
     background-color: white;
 }
 
+.card-header{
+    background-color:white !important;
+    display: flex !important;
+    justify-content: right !important;
+    padding: 0 !important;
+}
 .page-item{
     min-width: 40px;
     max-width: 40px;

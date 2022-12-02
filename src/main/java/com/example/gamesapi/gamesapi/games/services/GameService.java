@@ -109,4 +109,11 @@ public class GameService {
     }
 
 
+    public void deleteGame(int id) {
+        Optional<Game> gameOpt = gameRepository.findById(id);
+        if (gameOpt.isPresent()){
+            Game game = gameOpt.get();
+            gameRepository.delete(game);
+        }
+    }
 }

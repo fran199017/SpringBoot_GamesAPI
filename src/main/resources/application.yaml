@@ -8,7 +8,7 @@ server:
     protocol-header: x-forwarded-proto
 
 debug: true
-To heroku DB
+#To heroku DB
 spring:
   thymeleaf:
     mode: HTML5

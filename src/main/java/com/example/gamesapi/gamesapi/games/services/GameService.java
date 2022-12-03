@@ -57,10 +57,10 @@ public class GameService {
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null){
                 String jsonString =  response.getBody().toString();
                 JSONObject json = jsonConverter.getJSONObjectForJSONString(jsonString);
-
                 try{
                     JSONArray array = json.getJSONArray("results");
                     List<Game> games = new ArrayList<>();
+
                     for (int i = 0 ; i< array.length();i++){
                         Game game = new Game();
                         int id = array.getJSONObject(i).getInt("id");
@@ -68,6 +68,17 @@ public class GameService {
                         String rating = array.getJSONObject(i).getString("rating");
                         String image = array.getJSONObject(i).getString("background_image");
                         String released = array.getJSONObject(i).getString("released");
+
+                        JSONObject gameJSON = array.getJSONObject(i);
+                        JSONArray generes = gameJSON.getJSONArray("genres");
+                        List<String> generesStr = new ArrayList<>();
+
+                        for (int j = 0; j< generes.length();j++){
+                            generesStr.add(generes.getJSONObject(j).getString("name"));
+                        }
+
+                        game.setGeneres(String.join(",", generesStr));
+
                         game.setId(id);
                         game.setName(name);
                         game.setRating(rating);
@@ -82,6 +93,18 @@ public class GameService {
 
             }
         }
+    }
+
+
+    public Game findByPlatform(int id) {
+        for(int page = 1; page < 5; page++ ){
+            String url = apiName + ALLGAMES + apiKey + "&page_size="+ PAGE_SIZE + "&page=" + page + "&platforms=" + id;
+            ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(""), String.class);
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null){
+                log.info("Response {}" , response.getBody());
+            }
+        }
+        return  null;
     }
 
     public Page<Game> getListOfGames(Pageable pageable){
@@ -116,4 +139,5 @@ public class GameService {
             gameRepository.delete(game);
         }
     }
+
 }

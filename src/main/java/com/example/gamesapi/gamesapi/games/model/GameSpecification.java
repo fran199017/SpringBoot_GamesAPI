@@ -26,7 +26,6 @@ public class GameSpecification implements Specification<Game> {
         this.criteria = criteria;
     }
 
-
     @Override
     public Predicate toPredicate(Root<Game> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder builder) {
 

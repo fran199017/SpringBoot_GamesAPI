@@ -3,6 +3,7 @@ After having gathered some experience,I am working on a new API Rest. This API d
 from a public API a games. Enjoy!
 ## Important to execute locally.
 Tto execute LOCAL you need go main run configurations and add in Environment variables  spring.profiles.active=local to exec application-local.yaml
+![ScreenShot](https://raw.githubusercontent.com/fran199017/SpringBoot_GamesAPI/master/assets/img_5.png)
 ## Deployed at Heroku
 https://springbootgames.herokuapp.com/index
 ## Technologies

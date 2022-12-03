@@ -30,13 +30,7 @@
 					<a class="nav-link" th:href="@{developers?page=1}">List of developers</a>
 				</li>
 
-				<li class="nav-item">
-					<select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
-						<option selected disabled>Selecciona un filtro</option>
-						<option value="name">Name</option>
-						<option value="rating">Rating</option>
-					</select>
-				</li>
+
 			</ul>
 		</div>
 		<div class="float-right">
@@ -45,6 +39,13 @@
 			</form>
 		</div>
 	</nav>
+	<li class="nav-item">
+		<select style="margin-top: 7px;height: 25px;" onChange="showInput()" id="select_filter" class="form-select" aria-label="Default select example">
+			<option selected disabled>Selecciona un filtro</option>
+			<option value="name">Name</option>
+			<option value="rating">Rating</option>
+		</select>
+	</li>
 
 	<div style="margin: 15px; width: 15%;" class="input-group pull-right">
 	  <input type="text" id="input_filter" class="form-control" placeholder="Filter value">

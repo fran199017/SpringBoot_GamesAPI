@@ -8,16 +8,35 @@ server:
     protocol-header: x-forwarded-proto
 
 debug: true
+#To heroku DB
+#spring:
+#  thymeleaf:
+#    mode: HTML5
+#    encoding: UTF-8
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#  datasource:
+#    url: mysql://ayzjgb3p5t7gw6eh:rwy993agkkgo9dvk@ilzyz0heng1bygi8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/n34lcenpm8uavs0y
+#    username: ayzjgb3p5t7gw6eh
+#    password: pm1e7yjv1hbyr3ea
+
+#To local DB
 spring:
   thymeleaf:
     mode: HTML5
     encoding: UTF-8
+  h2:
+    console.enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.H2Dialect
   datasource:
-    url: mysql://ayzjgb3p5t7gw6eh:rwy993agkkgo9dvk@ilzyz0heng1bygi8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/n34lcenpm8uavs0y
-    username: ayzjgb3p5t7gw6eh
-    password: pm1e7yjv1hbyr3ea
+    url : jdbc:h2:mem:mydb;
+    driverClassName: org.h2.Driver
+    name:
+    username: sa
+    password:
+    hikari:
+      auto-commit: false
 
 api:
   name: https://rawg.io/api/

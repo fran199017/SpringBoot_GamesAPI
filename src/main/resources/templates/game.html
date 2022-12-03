@@ -38,8 +38,9 @@
 	  <div class="card-body">
 		  <img class="card-img-top" th:src="@{${game.backGroundImage}}" alt="Card image cap">
 		  <h5 class="card-title" th:text="${game.name}">Id</h5>
-		  <p class="card-text" th:text="${'Rating - ' + game.rating}">Rating</p>
-		  <p class="card-text" th:text="${'Released - ' + game.released}">Rating</p>
+		  <p class="card-text" th:text="${'Released - ' + game.released}">Released</p>
+		  <p class="card-text" th:text="${'Generes - ' + game.generes}">Generes</p>
+		  <p class="card-text text-success" th:text="${'Rating - ' + game.rating}">Rating</p>
 	  </div>
 	</div>
   </body>

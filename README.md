@@ -1,6 +1,8 @@
 # SpringBoot_GamesAPI (In process)
 After having gathered some experience,I am working on a new API Rest. This API downloads
 from a public API a games. Enjoy!
+## Important to execute locally.
+Tto execute LOCAL you need go main run configurations and add in Environment variables  spring.profiles.active=local to exec application-local.yaml
 ## Deployed at Heroku
 https://springbootgames.herokuapp.com/index
 ## Technologies

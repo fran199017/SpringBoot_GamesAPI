@@ -1,5 +1,7 @@
 package com.example.gamesapi.gamesapi.games.controller;
 
+import com.example.gamesapi.gamesapi.developers.model.Developers;
+import com.example.gamesapi.gamesapi.developers.services.DevelopersService;
 import com.example.gamesapi.gamesapi.games.model.Game;
 import com.example.gamesapi.gamesapi.games.model.GameSpecification;
 import com.example.gamesapi.gamesapi.games.model.GamesCriteria;
@@ -32,12 +34,14 @@ import java.util.stream.IntStream;
 public class PublicController {
 
     GameService gameService;
+    DevelopersService developersService;
     UserRepository userRepository;
 
     @Autowired
-    public PublicController(GameService gameService, UserRepository userRepository) {
+    public PublicController(GameService gameService, UserRepository userRepository, DevelopersService developersService) {
         this.gameService = gameService;
         this.userRepository = userRepository;
+        this.developersService = developersService;
     }
 
 
@@ -115,7 +119,6 @@ public class PublicController {
         }
     }
 
-    //TODO: Sacar rol admin en list users, borrar user como admin, controlar error de registro con mismo email.
 
     @DeleteMapping(value = "/game")
     public ModelAndView deleteGame(String id){
@@ -131,6 +134,33 @@ public class PublicController {
 
             ModelAndView model = new ModelAndView();
             model.setViewName("game");
+            return model;
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+            return null;
+        }
+    }
+
+    @GetMapping(value = "/developers")
+    public ModelAndView developers(int page){
+        try{
+            ModelAndView model = new ModelAndView();
+            model.setViewName("developers");
+
+            Pageable pageable = PageRequest.of(page, 30);
+            Page<Developers> listOfDevelopers = developersService.getListOfDevelopers(pageable);
+
+            int totalPages = listOfDevelopers.getTotalPages();
+
+            if (totalPages > 0){
+                List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                        .boxed()
+                        .collect(Collectors.toList());
+                model.addObject("pageNumbers", pageNumbers);
+            }
+
+            model.addObject("listOfDevelopers", listOfDevelopers);
+            model.addObject("page", page);
             return model;
         }catch(Exception e){
             log.error(e.getMessage(),e);

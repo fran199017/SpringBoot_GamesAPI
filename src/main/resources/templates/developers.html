@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color:#efefef !important;">
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -22,11 +23,13 @@
                 <a class="nav-link" th:href="@{/users}">List of users</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{public/games?page=1}">List of games</a>
+                <a class="nav-link" th:href="@{games?page=1}">List of games</a>
             </li>
+
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{public/developers?page=1}">List of developers</a>
+                <a class="nav-link" th:href="@{developers?page=1}">List of developers</a>
             </li>
+
         </ul>
     </div>
     <div class="float-right">
@@ -36,33 +39,28 @@
     </div>
 </nav>
 
-<div class="container text-center">
-    <div>
-        <h1>List of Users</h1>
-    </div>
+<div th:if="${not #lists.isEmpty(listOfDevelopers)}"  class="cards">
+    <div style="cursor:pointer;"   class="card"  th:each="developer : ${listOfDevelopers.content}">
 
-    <div>
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>User ID</th>
-                <th>E-mail</th>
-                <th>Role</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="userOfList: ${listUsers}">
-                <td th:text="${userOfList.id}">User ID</td>
-                <td th:text="${userOfList.email}">E-mail</td>
-                <td th:text="${userOfList.role}">E-mail</td>
-                <td th:if="${user.id != userOfList.id}" style="width: 6%;"><img style="width: 48%;" th:attr="onclick=|deleteUser('${userOfList.id}')|" th:src="@{../images/delete.png}" alt="Card image cap"></td>
-
-            </tr>
-            </tbody>
-        </table>
+        <img class="card-img-top" th:src="@{${developer.backGroundImage}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${'Name - ' + developer.name}">Id</h5>
+            <p class="card-text" th:text="${'Id - ' + developer.id}">Id</p>
+            <p class="card-text" th:text="${'Number of games - ' + developer.gamesCount}">Games count</p>
+        </div>
     </div>
 </div>
+<div th:if="${#lists.isEmpty(listOfDevelopers)}">
+    <p style="color:white;">Empty list</p>
+</div>
+
+<div class="text-xs-center">
+    <ul class="pagination  justify-content-center">
+        <li th:each="pageNumber : ${pageNumbers}" class="page-item">
+            <a th:href="@{'games?page=' + ${pageNumber}}" th:text=${pageNumber} class="page-link" >Previous</a>
+        </li>
+    </ul>
+</div>
+
 </body>
-<script type="text/javascript" src="static/js/users.js" th:src="@{/js/users.js}"></script>
 </html>

@@ -16,6 +16,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
+    driverClassName: com.mysql.jdbc.Driver
     url: ${URL}
     username: ${USER}
     password: ${PASSWORD}

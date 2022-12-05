@@ -20,9 +20,6 @@ spring:
     username: ${USER}
     password: ${PASSWORD}
 
-environment:
-  prefix: dev
-
 
 api:
   name: https://rawg.io/api/

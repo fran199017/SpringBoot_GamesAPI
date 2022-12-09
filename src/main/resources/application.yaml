@@ -8,19 +8,27 @@ server:
     protocol-header: x-forwarded-proto
 
 debug: true
-#To heroku DB - to execute LOCAL you need go main run configurations and add in Environment variables  spring.profiles.active=local
+
+#To local DB to execute you need go main run configurations and add in Environment variables  spring.profiles.active=local
 spring:
   thymeleaf:
     mode: HTML5
     encoding: UTF-8
+  h2:
+    console.enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.H2Dialect
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: ${URL}
-    username: ${USER}
-    password: ${PASSWORD}
+    url : jdbc:h2:mem:mydb;
+    driverClassName: org.h2.Driver
+    name:
+    username: sa
+    password:
+    hikari:
+      auto-commit: false
 
+environment:
+  prefix: local
 
 api:
   name: https://rawg.io/api/
